@@ -11,14 +11,9 @@ int main()
 {
 	try
 	{
-		Agr<int> agr{ 1,2,3,4,5 };
+		Agr<int> agr{ 1,1,3,32,24,5,2,23,4,23 };
 		Wsk<int> wsk{ agr };
-		agr.print();
-		std::cout << *wsk << "\n";
-		++wsk;
-		*wsk = 8;
-		std::cout << *wsk << "\n";
-		agr.print();
+		std::cout << *wsk.beg() << " " << *wsk.end() << "\n";
 	}
 	catch (const std::exception &message)
 	{
