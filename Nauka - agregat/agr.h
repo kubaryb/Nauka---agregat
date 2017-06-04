@@ -15,44 +15,54 @@ class Agr
 	typ *list{ nullptr };
 public:
 	Agr() :len(0) {}
-	Agr(const std::initializer_list<typ> &l)
-		:len(l.size())
-	{
-		list = new typ[len];
-		int i(0);
-		for (auto el : l)
-		{
-			list[i] = el;
-			++i;
-		}
-	}
-	typ& operator[](const int &index)
-	{
-		if (index >= len || index < 0)
-			throw std::runtime_error("Index out of range");
-		return list[index];
-	}
-	void print()
-	{
-		std::cout << "Printing content:\n";
-		for (int i = 0;i < len;++i)
-		{
-			std::cout << list[i] << " ";
-		}
-		std::cout << "\n";
-	}
-	~Agr()
-	{
-		if (len < 2)
-			delete list;
-		else
-			delete[]list;
-	}
+	Agr(const std::initializer_list<typ> &l);
+	typ& operator[](const int &index);
+	void print();
+	~Agr();
 	template <class>
 	friend class Wsk;
 };
 
+template <class typ>
+Agr<typ>::Agr(const std::initializer_list<typ> &l)
+	:len(l.size())
+{
+	list = new typ[len];
+	int i(0);
+	for (auto el : l)
+	{
+		list[i] = el;
+		++i;
+	}
+}
 
+template <class typ>
+typ& Agr<typ>::operator[](const int &index)
+{
+	if (index >= len || index < 0)
+		throw std::runtime_error("Index out of range");
+	return list[index];
+}
+
+template <class typ>
+void Agr<typ>::print()
+{
+	std::cout << "Printing content:\n";
+	for (int i = 0;i < len;++i)
+	{
+		std::cout << list[i] << " ";
+	}
+	std::cout << "\n";
+}
+
+template <class typ>
+Agr<typ>::~Agr()
+{
+	if (len < 2)
+		delete list;
+	else
+		delete[]list;
+}
 
 template <class typ>
 class Wsk
